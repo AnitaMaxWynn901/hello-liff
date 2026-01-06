@@ -9,10 +9,18 @@
 <body>
     <h1 id="msg">LOADING....</h1>
     <script>
-        liff.init({liffId: "2008827804-6NH9mmmn"})
-        .then(()=>{
-            document.getElementById("msg").textContent = "HELLO LIFF";
-    });
+        liff.init({ liffId: "2008827804-6NH9mmmn" })
+            .then(() => {
+                if (!liff.isLoggedIn()) {
+                    liff.login();
+                    return;
+                }
+
+                document.getElementById("msg").textContent = "HELLO LIFF";
+            })
+            .catch(err => {
+                document.getElementById("msg").textContent = "ERROR: " + err;
+            });
     </script>
 </body>
 </html>
