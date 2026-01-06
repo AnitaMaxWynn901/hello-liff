@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- LIFF SDK -->
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
 <body>
-  <h1>🍹 Menu</h1>
-  <p>This is the menu page.</p>
+  <h1 id="title">🍹 Menu</h1>
+  <p id="status">Loading...</p>
+
+  <ul>
+    <li>Mojito – 250฿</li>
+    <li>Whiskey – 300฿</li>
+    <li>Beer – 180฿</li>
+  </ul>
+
+  <script>
+    // 1. Initialize LIFF
+    liff.init({ liffId: "2008827804-Uuq8ElhE" })
+      .then(() => {
+        // 2. Check login status
+        if (!liff.isLoggedIn()) {
+          liff.login();
+          return;
+        }
+
+        // 3. Logged in successfully
+        document.getElementById("status").textContent = "Welcome to the menu 🍸";
+      })
+      .catch(err => {
+        document.getElementById("status").textContent = "LIFF init failed";
+        console.error(err);
+      });
+  </script>
 </body>
 </html>
